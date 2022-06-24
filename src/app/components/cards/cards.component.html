@@ -1,0 +1,83 @@
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Tarjetas De Credito</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Agregar Tarjetas</h3>
+                    <form [formGroup]="form" (ngSubmit)="addCard()">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-user" [class.green-icon]="this.form.get('propietari')?.valid" [class.red-icon]="this.form.get('propietari')?.invalid && this.form.get('propietari')?.touched">
+                                </i>
+                            </span>
+                            <input  formControlName="propietari" type="text" class="form-control" placeholder="Nombre del propietario">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-credit-card" [class.green-icon]="this.form.get('numberCard')?.valid" [class.red-icon]="this.form.get('numberCard')?.invalid && this.form.get('numberCard')?.touched">
+                                </i>
+                            </span>
+                            <input formControlName="numberCard" maxlength="16" type="text" class="form-control" placeholder="Number de tarjeta">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-calendar-days" [class.green-icon]="this.form.get('dateExpire')?.valid" [class.red-icon]="this.form.get('dateExpire')?.invalid && this.form.get('dateExpire')?.touched">
+                                        </i>
+                                    </span>
+                                    <input formControlName="dateExpire" maxlength="5" type="text" class="form-control" placeholder="MM/YY">
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="fa-solid fa-key" [class.green-icon]="this.form.get('cvv')?.valid" [class.red-icon]="this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched">
+                                        </i>
+                                    </span>
+                                    <input formControlName="cvv" maxlength="3" type="password" class="form-control" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button [disabled]="this.form.invalid" type="submit" class="btn btn-success btn-lg">
+                                <i class="fa-solid fa-database"></i>  Aceptar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h3>Listado de tarjetas</h3>
+                    <table class="table">
+                        <tbody>
+                            <tr *ngFor="let card of listCards; let i = index">
+                                <td>{{card.propietari}}</td>
+                                <td>{{card.numberCard}}</td>
+                                <td>{{card.dateExpire}}</td>
+                                <td>{{card.cvv}}</td>
+                                <td><i (click)="deleteCard(i)" class="fa-solid fa-trash text-danger"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
